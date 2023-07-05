@@ -9,8 +9,9 @@ def normalize_phones(apps, schema_editor):
     flats = Flat.objects.all()
     for flat in flats:
         number = phonenumbers.parse(flat.owners_phonenumber, "RU")
-        flat.owner_pure_phone = phonenumbers.format_number(number, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
-        flat.save()
+        if phonenumbers.is_valid_number(number):
+            flat.owner_pure_phone = phonenumbers.format_number(number, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
+            flat.save()
 
 
 class Migration(migrations.Migration):
