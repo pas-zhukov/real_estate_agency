@@ -74,3 +74,15 @@ class Complaint(models.Model):
 
     def __str__(self):
         return f"Жалоба  #{self.id}"
+
+
+class Owner(models.Model):
+    full_name = models.CharField('ФИО владельца', max_length=200)
+    phonenumber = models.CharField('Номер владельца', max_length=20)
+    pure_phone = PhoneNumberField(verbose_name='Нормализованный номер владельца',
+                                  blank=True)
+
+    flats = models.ForeignKey(Flat,
+                              on_delete=models.CASCADE,
+                              verbose_name='Квартиры в собственности',
+                              related_name='flat_owners')
