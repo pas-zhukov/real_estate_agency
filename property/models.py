@@ -5,6 +5,9 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Flat(models.Model):
+    owner = models.ManyToManyField("Owner",
+                                   verbose_name='Владелец',
+                                   related_name='owner_flats')
     owner_deprecated = models.CharField('ФИО владельца', max_length=200)
     owners_phonenumber = models.CharField('Номер владельца', max_length=20)
     owner_pure_phone = PhoneNumberField(verbose_name='Нормализованный номер владельца',
