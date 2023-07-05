@@ -8,9 +8,10 @@ def fill_db_owners(apps, schema_editor):
     flats = Flat.objects.all()
     for flat in flats:
         owner = Owner.objects.get(full_name=flat.owner_deprecated,
-                          phonenumber=flat.owners_phonenumber,
-                          pure_phone=flat.owner_pure_phone,)
+                                  phonenumber=flat.owners_phonenumber,
+                                  pure_phone=flat.owner_pure_phone,)
         flat.owner.add(owner)
+        flat.save()
 
 
 class Migration(migrations.Migration):
