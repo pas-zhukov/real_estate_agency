@@ -82,7 +82,6 @@ class Owner(models.Model):
     pure_phone = PhoneNumberField(verbose_name='Нормализованный номер владельца',
                                   blank=True)
 
-    flats = models.ForeignKey(Flat,
-                              on_delete=models.CASCADE,
-                              verbose_name='Квартиры в собственности',
-                              related_name='flat_owners')
+    flats = models.ManyToManyField(Flat,
+                                   verbose_name='Квартиры в собственности',
+                                   related_name='flat_owners')
